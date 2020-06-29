@@ -33,10 +33,15 @@
 
   Also this app is running in my personal AWS service:
   ```
-  http://twitterchallenge-env.eba-me6phegv.us-east-2.elasticbeanstalk.com/view-profiles?id=4
+  http://employeechallenge-env.eba-92twvvp4.us-east-2.elasticbeanstalk.com/view-employees
   ```
+API
   ```
-  http://twitterchallenge-env.eba-me6phegv.us-east-2.elasticbeanstalk.com/profiles/4
+  http://employeechallenge-env.eba-92twvvp4.us-east-2.elasticbeanstalk.com/employees
+  ```
+Swagger
+  ```
+  http://employeechallenge-env.eba-92twvvp4.us-east-2.elasticbeanstalk.com/swagger-ui.html#/application-controller
   ```
  * Technologies:
     - 
