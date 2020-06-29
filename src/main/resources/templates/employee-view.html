@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Employees Salary Information</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+    $(function(){
+        $('#allEmployeesButton').on('click', function(event) {
+            $.getJSON("http://localhost:5000/employees/", function(result) {
+                $("#employee-table tbody").empty();
+                printTable(result);
+            });
+        });
+    });
+    $(document).ready(function(){
+        $("#error-container").hide();
+        $('#identifier').keyup(function() {
+            $.getJSON("http://localhost:5000/employees/" + this.value, function(idResult) {
+                $("#employee-table tbody").empty();
+                printTableUniqueId(idResult);
+            })  .fail(function() {
+                $("#error-container").show();
+                $("#error-info").empty();
+                $("#error-info").append("Employee not found");
+              })
+              .done(function() {
+                $("#error-container").hide();
+                $("#error-info").empty();
+              });
+        });
+    });
+    function printTableUniqueId(result){
+       var tBodyHtml = "";
+       tBodyHtml  = '<tr>' +
+                    '<td>' + result.id + '</td>' +
+                    '<td>' + result.name + '</td>' +
+                    '<td>' + result.contract + '</td>' +
+                    '<td>' + result.netSalary + '</td>' +
+                    '<td>' + result.employeeRol.roleName + '</td>' +
+                '</tr>';
+      $("#employee-table tbody").append(tBodyHtml);
+    }
+    function printTable(result){
+        var tBodyHtml = "";
+        $.each(result, function(key, value) {
+           tBodyHtml  = '<tr>' +
+                        '<td>' + value.id + '</td>' +
+                        '<td>' + value.name + '</td>' +
+                        '<td>' + value.contract + '</td>' +
+                        '<td>' + value.netSalary + '</td>' +
+                        '<td>' + value.employeeRol.roleName + '</td>' +
+                    '</tr>';
+          $("#employee-table tbody").append(tBodyHtml);
+        });
+    }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <div class="thumbnail" style="text-align: center"><H1>Employees information</H1></div>
+    <div class="input-group mb-3">
+        <input type="text" id="identifier" class="form-control" placeholder="Find by Id" aria-label="Id" aria-describedby="basic-addon1">
+    </div>
+    <hr>
+    <div>
+        <button id="allEmployeesButton" type="button" class="btn btn-info">Get Employees</button>
+    </div>
+    <table id="employee-table" class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Contract Type</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Rol</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div id="error-container" class="alert alert-danger" role="alert">
+        <strong>Error: </strong> <div id="error-info"></div>
+    </div>
+</div>
+</body>
+</html>
