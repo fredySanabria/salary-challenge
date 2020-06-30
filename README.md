@@ -52,6 +52,10 @@ Swagger
         
   + BackEnd
   It's a RestFull API developed with Java 8, using SpringBoot framework, Rest template to connect with Employees API repository and Swagger 2 for the documentation.
-         
+ 
+ * To Do List:
+    - 
+    -Create  cache in rest template in order to improve performance.
+    
     
              
