@@ -15,6 +15,11 @@ public class EmployeeService {
     @Autowired
     private IEmployeeRepository employeeRepository;
 
+    /**
+     * Get Employees method get entity list from repository and
+     * map each one to EmployeeDTO
+     * @return
+     */
     public List<EmployeeDTO> getEmployees(){
         return employeeRepository.getEmployees()
                 .stream()
@@ -22,6 +27,12 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Find Employee method get entity list from
+     * repository and filter by id, after that Map to DTO object
+     * @param id
+     * @return
+     */
     public EmployeeDTO findEmployee(Integer id) {
         return employeeRepository.getEmployees()
                 .stream()
